@@ -9,7 +9,7 @@
 ##### 4. Open the terminal and install all required dependencies with ***`npm i`*** #####
 ##### 5. Add a new terminal and navigate one to the server and one to the client/admin app using ***`cd command`*** #####
 ##### 6. In the backend terminal type ***`npm start`*** to start the server #####
-##### 7. In the frontend terminal type ***`npm start`*** to start the app #####
+##### 7. In the frontend terminal type ***`npm start`*** to start the client app #####
 ##### 8. In the frontend terminal type ***`npm start`*** to start the admin app#####
 
 <img src="screenshots/Screen Shot 2022-01-23 at 1.54.55.png" >
