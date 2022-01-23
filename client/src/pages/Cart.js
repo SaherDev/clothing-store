@@ -152,8 +152,7 @@ const Button = styled.button`
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const { currentUser } = useSelector((state) => state.user);
-  const { order, createOrder } = useOrder();
-  const history = useHistory();
+  const { createOrder } = useOrder();
 
   const handleClick = () => {
     createOrder({
@@ -164,11 +163,7 @@ const Cart = () => {
       })),
       amount: cart.total,
       address: "",
-    }).then(() =>
-      history.push("/success", {
-        orderId: order._id,
-      })
-    );
+    });
   };
   return (
     <Container>
