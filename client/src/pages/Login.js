@@ -68,11 +68,13 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const history = useHistory();
-  const { isFetching, error } = useSelector((state) => state.user);
+  const { isLoading, error, currentUser } = useSelector((state) => state.user);
 
   const handleClick = (e) => {
     e.preventDefault();
-    login(dispatch, { username, password }).then(() => history.push("/"));
+    login(dispatch, { username, password });
+
+    if (currentUser) history.push("/");
   };
 
   return (
@@ -89,7 +91,7 @@ const Login = () => {
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button onClick={handleClick} disabled={isFetching}>
+          <Button onClick={handleClick} disabled={isLoading}>
             כניסה
           </Button>
           {error && <Error>סיסמה שגויה..</Error>}

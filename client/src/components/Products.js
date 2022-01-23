@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Product from "./Product";
-import { publicRequest } from "../requestMethods";
+import { useProductsFetch } from "../hooks/useProductsFetch";
 
 const Container = styled.div`
   padding: 20px;
@@ -11,22 +11,11 @@ const Container = styled.div`
 `;
 
 const Products = ({ cat, filters, sort }) => {
-  const [products, setProducts] = useState([]);
+  const { products, fetchProducts } = useProductsFetch();
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const res = await publicRequest.get(
-          cat
-            ? `/products?offset=${0}&limit=${200}&category=${cat}`
-            : `/products?offset=${0}&limit=${8}`
-        );
-
-        setProducts(res.data.products);
-      } catch (err) {}
-    };
-    getProducts();
+    fetchProducts(cat);
   }, [cat]);
 
   useEffect(() => {

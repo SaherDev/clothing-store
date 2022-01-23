@@ -7,7 +7,7 @@ import { mobile } from "../responsive";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { userRequest } from "../requestMethods";
+import { useOrder } from "../hooks/useOrder";
 
 const Container = styled.div`
   direction: rtl;
@@ -152,29 +152,23 @@ const Button = styled.button`
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const { currentUser } = useSelector((state) => state.user);
-
+  const { order, createOrder } = useOrder();
   const history = useHistory();
 
   const handleClick = () => {
-    const createOrder = async () => {
-      try {
-        const res = await userRequest.post("/orders", {
-          userId: currentUser._id,
-          products: cart.products.map((item) => ({
-            productId: item._id,
-            quantity: item.quantity,
-          })),
-          amount: cart.total,
-          address: "",
-        });
-
-        history.push("/success", {
-          orderId: res.data.order._id,
-        });
-      } catch {}
-    };
-
-    createOrder();
+    createOrder({
+      userId: currentUser._id,
+      products: cart.products.map((item) => ({
+        productId: item._id,
+        quantity: item.quantity,
+      })),
+      amount: cart.total,
+      address: "",
+    }).then(() =>
+      history.push("/success", {
+        orderId: order._id,
+      })
+    );
   };
   return (
     <Container>

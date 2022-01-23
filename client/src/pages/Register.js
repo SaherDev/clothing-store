@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { mobile } from "../responsive";
-
 import { useState } from "react";
-import { publicRequest } from "../requestMethods";
+import { useUserAuth } from "../hooks/useUserAuth";
 
 const Container = styled.div`
   direction: rtl;
@@ -73,31 +72,14 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
-  const [isFetching, setisFetching] = useState(false);
-  const [error, setError] = useState({});
+  const { isLoading, error, registerUser } = useUserAuth();
 
   const handleClick = (e) => {
     e.preventDefault();
 
-    const register = async () => {
-      setError(false);
-      setisFetching(true);
-
-      try {
-        await publicRequest.post("auth/register", {
-          username,
-          email,
-          password,
-        });
-        window.location.reload(false);
-      } catch (err) {
-        setError(err);
-      }
-
-      setisFetching(false);
-    };
-
-    register();
+    registerUser({ username, password, email }).then(() =>
+      window.location.reload(false)
+    );
   };
 
   return (
@@ -124,7 +106,7 @@ const Register = () => {
             על ידי יצירת חשבון, אני מסכים לעיבוד האישי שלי נתונים בהתאם ל
             <b>מדיניות הפרטיות</b>
           </Agreement>
-          <Button onClick={handleClick} disabled={isFetching}>
+          <Button onClick={handleClick} disabled={isLoading}>
             יצירת חשבון
           </Button>
           {error && <Error>משהו השתבש ..</Error>}
