@@ -16,8 +16,8 @@
 <table>
 
   <tr>
-    <td valign="top"><img src="screenshots/Screen Shot 2022-01-23 at 1.59.41.png" ></td>
-    <td valign="top"><img src="screenshots/Screen Shot 2022-01-23 at 1.59.02.png" ></td>
+    <td ><img src="screenshots/Screen Shot 2022-01-23 at 1.59.41.png" ></td>
+    <td ><img src="screenshots/Screen Shot 2022-01-23 at 1.59.02.png" ></td>
 
   </tr>
  </table>
