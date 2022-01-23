@@ -1,6 +1,6 @@
 # clothing-store: client + admin + api
 
-***using React, Node.js, mongoDB, Redux, JWT***
+***using React, Node.js, mongoDB, Redux, JWT, Firebase***
 
 ## Instructions
 ##### 1. Clone ***( using `git clone` )*** or Download the folder ***( using ***`Download ZIP`*** option )*** #####
