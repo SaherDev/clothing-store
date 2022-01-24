@@ -7,7 +7,20 @@ const createAccessToken = (user) => {
     },
     process.env.JWT_ACC_TOKEN_KEY,
     {
-      expiresIn: "3d",
+      expiresIn: "15m",
+    }
+  );
+};
+
+const createRefreshToken = (user) => {
+  return jwt.sign(
+    {
+      id: user._id,
+      tokenversion: user.tokenversion,
+    },
+    process.env.JWT_REF_TOKEN_KEY,
+    {
+      expiresIn: "7d",
     }
   );
 };
@@ -16,7 +29,4 @@ const jwtVerify = (token, secret) => {
   return jwt.verify(token, secret);
 };
 
-module.exports = {
-  createAccessToken,
-  jwtVerify,
-};
+module.exports = { createRefreshToken, createAccessToken, jwtVerify };

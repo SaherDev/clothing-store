@@ -10,6 +10,7 @@ const UserSchema = new mongoose.Schema(
       default: false,
     },
     img: { type: String },
+    tokenversion: { type: Number, default: 0 },
   },
   { timestamps: true }
 );

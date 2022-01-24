@@ -1,7 +1,11 @@
 const router = require("express").Router();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
-const { createAccessToken } = require("../middlewares/jwtUtil");
+const {
+  createAccessToken,
+  createRefreshToken,
+  jwtVerify,
+} = require("../middlewares/jwtUtil");
 
 router.post("/register", async (req, res) => {
   const userData = req.body;
@@ -63,11 +67,65 @@ router.post("/login", async (req, res) => {
       .status(404)
       .json({ error_message: "Wrong user name, password!" });
 
-  const accessToken = createAccessToken(foundUser);
+  let accessToken;
+  let refreshtoken;
+  try {
+    accessToken = createAccessToken(foundUser);
+    refreshtoken = createRefreshToken(foundUser);
+  } catch (err) {
+    return res.status(500).json({ error_message: err.message });
+  }
+
+  if (!refreshtoken)
+    return res.status(404).json({ error_message: "Could not create token!" });
+
+  if (!refreshtoken)
+    return res.status(404).json({ error_message: "Could not create token!" });
 
   res.status(200).json({
     user: foundUser,
     accessToken: accessToken,
+    refreshtoken: refreshtoken,
+  });
+});
+
+router.post("/refresh_token/", async (req, res) => {
+  const refreshtokenData = req.body.refreshtoken;
+  if (!refreshtokenData) return res.status(401).json({ accesstoken: "" });
+
+  let payload;
+  try {
+    payload = jwtVerify(refreshtokenData, process.env.JWT_REF_TOKEN_KEY);
+  } catch (err) {
+    return res.status(500).json({ error_message: err.message });
+  }
+
+  if (!payload) return res.status(401).json({ accesstoken: "" });
+
+  let foundUser;
+  try {
+    foundUser = await User.findById(payload.id);
+  } catch (err) {
+    return res.status(500).json({ error_message: err.message });
+  }
+
+  if (!foundUser) return res.status(401).json({ accesstoken: "" });
+
+  if (foundUser.tokenversion !== payload.tokenversion)
+    return res.status(401).json({ accesstoken: "" });
+
+  let accesstoken;
+
+  try {
+    accesstoken = createAccessToken(foundUser);
+  } catch (err) {
+    return res.status(500).json({ error_message: err.message });
+  }
+
+  if (!accesstoken) return res.status(401).json({ accesstoken: "" });
+
+  res.status(200).json({
+    accesstoken: accesstoken,
   });
 });
 
