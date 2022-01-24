@@ -91,6 +91,7 @@ router.post("/login", async (req, res) => {
 
 router.post("/refresh_token/", async (req, res) => {
   const refreshtokenData = req.body.refreshtoken;
+
   if (!refreshtokenData) return res.status(401).json({ accesstoken: "" });
 
   let payload;
@@ -125,7 +126,7 @@ router.post("/refresh_token/", async (req, res) => {
   if (!accesstoken) return res.status(401).json({ accesstoken: "" });
 
   res.status(200).json({
-    accesstoken: accesstoken,
+    accessToken: accesstoken,
   });
 });
 
