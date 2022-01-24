@@ -151,7 +151,7 @@ const Button = styled.button`
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const { currentUser } = useSelector((state) => state.user);
-  const { createOrder } = useOrder();
+  const { isLoading, createOrder } = useOrder();
 
   const handleClick = () => {
     createOrder({
@@ -225,7 +225,9 @@ const Cart = () => {
               <SummaryItemPrice> {cart.total} ₪</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem></SummaryItem>
-            <Button onClick={handleClick}>הזמן עכשיו</Button>
+            <Button onClick={handleClick} disabled={isLoading}>
+              {isLoading ? "טוען ..." : "הזמן עכשיו"}
+            </Button>
           </Summary>
         </Bottom>
       </Wrapper>

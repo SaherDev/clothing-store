@@ -1,4 +1,5 @@
 import { useLocation } from "react-router";
+import { Link } from "react-router-dom";
 
 const Success = () => {
   const location = useLocation();
@@ -19,7 +20,9 @@ const Success = () => {
       {orderId
         ? `ההזמנה נוצרה בהצלחה. מספר ההזמנה שלך הוא ${orderId}`
         : `ההזמנה שלך בהכנה...`}
-      <button style={{ padding: 10, marginTop: 20 }}>עבור לעמוד הבית</button>
+      <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+        <button style={{ padding: 10, marginTop: 20 }}>עבור לעמוד הבית</button>
+      </Link>
     </div>
   );
 };

@@ -7,8 +7,9 @@ export const login = async (dispatch, puser) => {
     const res = await publicRequest.post("/auth/login", puser);
 
     const { user, accessToken, refreshtoken } = res.data;
-
-    dispatch(loginSuccess({ ...user, accessToken, refreshtoken }));
+    localStorage.setItem("accessToken", accessToken);
+    localStorage.setItem("refreshtoken", refreshtoken);
+    dispatch(loginSuccess(user));
   } catch (err) {
     dispatch(loginFailure());
   }

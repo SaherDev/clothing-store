@@ -189,6 +189,7 @@ const Product = () => {
                 <Amount>{quantity}</Amount>
                 <Remove onClick={() => handleQuantity("dec")} />
               </AmountContainer>
+
               <Button onClick={handleClick}>הוסף לסל</Button>
             </AddContainer>
           </InfoContainer>

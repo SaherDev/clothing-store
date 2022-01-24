@@ -54,7 +54,6 @@ const Button = styled.button`
   cursor: pointer;
   margin-bottom: 10px;
   &:disabled {
-    color: green;
     cursor: not-allowed;
   }
 `;
@@ -72,6 +71,7 @@ const Login = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
+
     login(dispatch, { username, password });
   };
 
@@ -89,9 +89,11 @@ const Login = () => {
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
+
           <Button onClick={handleClick} disabled={isLoading}>
-            כניסה
+            {isLoading ? "טוען ..." : "כניסה"}
           </Button>
+
           {error && <Error>סיסמה שגויה..</Error>}
           <Link
             style={{

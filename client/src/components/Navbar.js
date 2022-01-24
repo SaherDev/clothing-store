@@ -72,6 +72,7 @@ const MenuItem = styled.div`
 
 const Navbar = () => {
   const quantity = useSelector((state) => state.cart.quantity);
+  const username = useSelector((state) => state.user.currentUser?.username);
 
   return (
     <Container>
@@ -87,9 +88,17 @@ const Navbar = () => {
           <Logo>C-Shop</Logo>
         </Center>
         <Right>
-          <Link to="/login" style={{ textDecoration: "none", color: "black" }}>
-            <MenuItem>כניסה</MenuItem>
-          </Link>
+          {username ? (
+            <MenuItem>{username}</MenuItem>
+          ) : (
+            <Link
+              to="/login"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <MenuItem>כניסה</MenuItem>
+            </Link>
+          )}
+
           <Link
             to="/register"
             style={{ textDecoration: "none", color: "black" }}

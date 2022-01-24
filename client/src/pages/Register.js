@@ -59,6 +59,9 @@ const Button = styled.button`
   background-color: teal;
   color: white;
   cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+  }
 `;
 
 const Error = styled.span`
@@ -106,9 +109,11 @@ const Register = () => {
             על ידי יצירת חשבון, אני מסכים לעיבוד האישי שלי נתונים בהתאם ל
             <b>מדיניות הפרטיות</b>
           </Agreement>
+
           <Button onClick={handleClick} disabled={isLoading}>
-            יצירת חשבון
+            {isLoading ? "טוען ..." : "יצירת חשבון"}
           </Button>
+
           {error && <Error>משהו השתבש ..</Error>}
         </Form>
       </Wrapper>
