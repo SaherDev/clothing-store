@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { login } from "../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -67,14 +67,12 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const history = useHistory();
-  const { isLoading, error, currentUser } = useSelector((state) => state.user);
+
+  const { isLoading, error } = useSelector((state) => state.user);
 
   const handleClick = (e) => {
     e.preventDefault();
     login(dispatch, { username, password });
-
-    if (currentUser) history.push("/");
   };
 
   return (

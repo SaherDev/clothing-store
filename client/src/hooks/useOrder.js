@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { userRequest } from "../requestMethods";
+import { userRequest } from "../utils/axiosInstanse";
 import { refreshCart } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
 export const useOrder = () => {

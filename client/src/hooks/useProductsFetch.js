@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { publicRequest } from "../requestMethods";
+import { publicRequest } from "..//utils/axiosInstanse";
 
 export const useProductsFetch = () => {
   const [isLoading, setisLoading] = useState(false);

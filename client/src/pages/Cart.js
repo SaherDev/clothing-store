@@ -4,7 +4,6 @@ import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
-import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useOrder } from "../hooks/useOrder";

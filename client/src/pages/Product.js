@@ -135,7 +135,7 @@ const Product = () => {
 
   useEffect(() => {
     fetchProduct(id);
-  }, [id]);
+  }, [id, fetchProduct]);
 
   const handleQuantity = (type) => {
     if (type === "dec") {
