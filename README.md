@@ -13,5 +13,6 @@
 ##### 8. In the frontend terminal type ***`npm start`*** to start the admin app#####
 
 <img src="screenshots/Screen Shot 2022-01-23 at 1.54.55.png" >
+<img src"screenshots/Screen Shot 2022-01-25 at 0.16.17.png" >
 
 
