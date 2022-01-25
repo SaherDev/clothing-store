@@ -45,7 +45,7 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
     return res.status(404).json({ error_message: "product not found!" });
 
   res.status(200).json({
-    user: updatedProduct,
+    product: updatedProduct,
   });
 });
 
@@ -117,7 +117,7 @@ router.get("/", async (req, res) => {
     return res.status(500).json({ error_message: err.message });
   }
   if (!foundProducts)
-    return res.status(404).json({ error_message: "users not foun" });
+    return res.status(404).json({ error_message: "product not foun" });
 
   res.status(200).json({ products: foundProducts });
 });
